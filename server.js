@@ -8,6 +8,10 @@ const authRoutes = require('./routes/authRoutes');
 require('dotenv').config();
 require('./config/passport'); // Passport Config
 const movieRoutes = require('./routes/movieRoutes'); // Thêm route movies
+const showtimeRoutes = require('./routes/showtimeRoutes');
+const bookingRoutes = require('./routes/bookingRoutes');
+
+const theaterRoutes = require('./routes/theaterRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -37,7 +41,7 @@ app.use((req, res, next) => {
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/api/auth', authRoutes, movieRoutes);
+app.use('/api/auth', authRoutes, movieRoutes, showtimeRoutes, theaterRoutes, bookingRoutes);
 
 mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
