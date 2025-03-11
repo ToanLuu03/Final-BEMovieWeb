@@ -1,7 +1,7 @@
 // controllers/movieController.js
 const Movie = require('../models/Movie');
-const Showtime = require('../models/Showtime'); // Đảm bảo import đúng
-const Review = require('../models/Review'); // Nếu có dùng reviews
+const Showtime = require('../models/Showtime'); 
+const Review = require('../models/Review'); 
 // 🟢 Tạo mới phim
 exports.createMovie = async (req, res) => {
     try {

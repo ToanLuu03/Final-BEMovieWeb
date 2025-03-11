@@ -10,7 +10,7 @@ require('./config/passport'); // Passport Config
 const movieRoutes = require('./routes/movieRoutes'); // Thêm route movies
 const showtimeRoutes = require('./routes/showtimeRoutes');
 const bookingRoutes = require('./routes/bookingRoutes');
-
+const userRoutes = require('./routes/userRoutes');
 const theaterRoutes = require('./routes/theaterRoutes');
 
 const app = express();
@@ -41,7 +41,7 @@ app.use((req, res, next) => {
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/api/auth', authRoutes, movieRoutes, showtimeRoutes, theaterRoutes, bookingRoutes);
+app.use('/api/auth', authRoutes, movieRoutes, showtimeRoutes, theaterRoutes, bookingRoutes, userRoutes);
 
 mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,

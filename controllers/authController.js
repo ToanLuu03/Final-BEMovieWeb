@@ -75,7 +75,7 @@ exports.googleAuth = (req, res) => {
         // Tạo JWT Token và chuyển hướng về FE
         const token = createToken(req.user);
         const frontendUrl = process.env.FRONTEND_URL || "http://localhost:5173";
-        res.redirect(`${frontendUrl}/home?token=${token}`);
+        res.redirect(`${frontendUrl}/token=${token}`);
     } catch (error) {
         res.status(500).json({ message: 'Google Authentication failed!', error });
     }

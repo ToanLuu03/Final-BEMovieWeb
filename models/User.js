@@ -7,6 +7,7 @@ const userSchema = new mongoose.Schema({
     password: { type: String },
     googleId: { type: String, unique: true, sparse: true }, // Tránh lỗi duplicate key với null
     role: { type: String, enum: ['user', 'admin'], default: 'user' },
+    favMovies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movie' }] // Danh sách phim yêu thích
 }, { timestamps: true });
 
 // Hash password khi lưu (không áp dụng cho Google OAuth)

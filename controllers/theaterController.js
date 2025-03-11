@@ -40,3 +40,12 @@ exports.getTheaterById = async (req, res) => {
         res.status(500).json({ error: 'Error retrieving theater information!' });
     }
 };
+// Lấy tất cả rạp chiếu (không phân trang)
+exports.getAllTheaters = async (req, res) => {
+    try {
+        const theaters = await Theater.find();
+        res.json(theaters);
+    } catch (error) {
+        res.status(500).json({ error: 'Error getting all theaters!' });
+    }
+};
