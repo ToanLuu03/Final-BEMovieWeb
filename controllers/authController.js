@@ -6,7 +6,13 @@ require('dotenv').config();
 // Tạo JWT Token
 const createToken = (user) => {
     return jwt.sign(
-        { userId: user._id, role: user.role },
+        { 
+            userId: user._id, 
+            email: user.email,
+            name: user.name,
+            picture: user.picture,
+            role: user.role 
+        },
         process.env.JWT_SECRET,
         { expiresIn: '1h' }
     );
@@ -72,10 +78,13 @@ exports.googleAuth = (req, res) => {
             return res.status(401).json({ message: 'Authentication failed!' });
         }
 
-        // Tạo JWT Token và chuyển hướng về FE
+        // Tạo JWT Token với thông tin người dùng
         const token = createToken(req.user);
+
         const frontendUrl = process.env.FRONTEND_URL || "http://localhost:5173";
-        res.redirect(`${frontendUrl}/token=${token}`);
+        // Chuyển hướng về frontend với token
+         res.redirect(`${frontendUrl}/signin?token=${token}`);
+        // res.redirect(`${frontendUrl}/home?token=${token}`);
     } catch (error) {
         res.status(500).json({ message: 'Google Authentication failed!', error });
     }
