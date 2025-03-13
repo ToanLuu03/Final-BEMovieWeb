@@ -73,3 +73,17 @@ exports.removeFavoriteMovie = async (req, res) => {
         res.status(500).json({ error: 'Error removing favorite movie!' });
     }
 };
+exports.getIdFromToken = async (req, res) => {
+    try {
+        console.log('User from token:', req.user); 
+
+        res.status(200).json({
+            status: 'Successful',
+            userId: req.user._id 
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Error retrieving user ID!' });
+    }
+};
+
