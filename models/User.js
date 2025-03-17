@@ -5,9 +5,12 @@ const userSchema = new mongoose.Schema({
     username: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String },
-    googleId: { type: String, unique: true, sparse: true }, // Tránh lỗi duplicate key với null
+    googleId: { type: String, unique: true, sparse: true },
     role: { type: String, enum: ['user', 'admin'], default: 'user' },
-    favMovies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movie' }] // Danh sách phim yêu thích
+    favMovies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movie' }],
+    avatar: { type: String, default: '' },  
+    bio: { type: String, maxlength: 200 }, 
+    location: { type: String }
 }, { timestamps: true });
 
 // Hash password khi lưu (không áp dụng cho Google OAuth)

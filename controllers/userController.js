@@ -75,11 +75,9 @@ exports.removeFavoriteMovie = async (req, res) => {
 };
 exports.getIdFromToken = async (req, res) => {
     try {
-        console.log('User from token:', req.user); 
-
         res.status(200).json({
             status: 'Successful',
-            userId: req.user._id 
+            userId: req.user._id
         });
     } catch (error) {
         console.error(error);
@@ -87,3 +85,39 @@ exports.getIdFromToken = async (req, res) => {
     }
 };
 
+exports.get_User_byId = async (req, res) => {
+
+    const user = await User.findById(req.params.id)
+    if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+    }
+    res.status(200).json({
+        profile: "Profile of user",
+        user
+    });
+}
+
+exports.update_User = async (req, res) => {
+    try {
+        const { username, email, bio, avatar, dob, location } = req.body;
+
+        const user = await User.findById(req.params.id);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        user.username = username || user.username;
+        user.email = email || user.email;
+        user.bio = bio || user.bio;
+        user.avatar = avatar || user.avatar;
+        user.dob = dob || user.dob;
+        user.location = location || user.location;
+
+        const updatedUser = await user.save();
+        res.status(200).json({
+            message: "Update successfully",
+            updatedUser
+        });
+    } catch (error) {
+        res.status(500).json({ message: 'Server error', error });
+    }
+}
