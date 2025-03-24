@@ -151,3 +151,41 @@ exports.cancelBooking = async (req, res) => {
         res.status(500).json({ message: "Server error!", error });
     }
 };
+exports.getTicketsByUser = async (req, res) => {
+    try {
+        const userId = req.params.userId;
+        
+        // Tìm tất cả các đơn đặt vé của user
+        const bookings = await Booking.find({ user: userId })
+            .populate("movie")
+            .populate("theater")
+            .populate("showtime")
+            .populate("tickets");
+
+        if (!bookings || bookings.length === 0) {
+            return res.status(404).json({ message: "No tickets found for this user!" });
+        }
+
+        // Tạo danh sách vé từ bookings
+        const tickets = bookings.flatMap(booking =>
+            booking.tickets.map(ticket => ({
+                ticketId: ticket._id,
+                movie: booking.movie.title,
+                moviePoster: booking.movie.posterUrl,
+                theater: booking.theater.name,
+                address: booking.theater.location.address,
+                showDate: booking.showtime.showDate,
+                showTime: booking.showtime.timeSlots[0].startTime, // Giả sử chỉ lấy suất đầu tiên
+                seatNumber: ticket.seatNumber,
+                totalPrice: ticket.totalPrice,
+                paymentStatus: ticket.paymentStatus,
+                status: ticket.status,
+            }))
+        );
+
+        res.json({ tickets });
+    } catch (error) {
+        console.error("Error fetching tickets:", error);
+        res.status(500).json({ message: "Server error!", error });
+    }
+};
