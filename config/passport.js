@@ -12,11 +12,9 @@ passport.use(
         },
         async (accessToken, refreshToken, profile, done) => {
             try {
-                // Tìm user qua Google ID
                 const existingUser = await User.findOne({ googleId: profile.id });
                 if (existingUser) return done(null, existingUser);
 
-                // Tạo user mới nếu chưa tồn tại
                 const newUser = await User.create({
                     username: profile.displayName,
                     email: profile.emails[0].value,
@@ -32,7 +30,6 @@ passport.use(
     )
 );
 
-// Serialize & Deserialize User
 passport.serializeUser((user, done) => {
     done(null, user.id);
 });
