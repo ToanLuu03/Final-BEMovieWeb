@@ -7,10 +7,10 @@ const ticketSchema = new mongoose.Schema({
     movie: { type: mongoose.Schema.Types.ObjectId, ref: 'Movie', required: true },
     showtime: { type: mongoose.Schema.Types.ObjectId, ref: 'Showtime', required: true },
     theater: { type: mongoose.Schema.Types.ObjectId, ref: 'Theater', required: true },
-    seatNumber: [{ type: String, required: true }], // Ví dụ: "A1"
+    seatNumber: [{ type: String, required: true }], 
     ticketPrice: { type: Number, required: true },
-    totalPrice: { type: Number, required: true }, // Tổng tiền vé
-    qrCode: { type: String }, // Lưu trữ URL hoặc mã QR nếu có
+    totalPrice: { type: Number, required: true },
+    qrCode: { type: String },
     paymentStatus: {
         type: String,
         enum: ['pending', 'paid', 'failed'],

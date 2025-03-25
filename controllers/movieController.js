@@ -1,8 +1,7 @@
-// controllers/movieController.js
 const Movie = require('../models/Movie');
 const Showtime = require('../models/Showtime'); 
 const Review = require('../models/Review'); 
-// 🟢 Tạo mới phim
+// Tạo mới phim
 exports.createMovie = async (req, res) => {
     try {
         const newMovie = await Movie.create(req.body);
@@ -15,7 +14,7 @@ exports.createMovie = async (req, res) => {
     }
 };
 
-// 🟢 Lấy danh sách tất cả các phim
+// Lấy danh sách tất cả các phim
 exports.getAllMovies = async (req, res) => {
     try {
         const movies = await Movie.find()
@@ -36,7 +35,7 @@ exports.getAllMovies = async (req, res) => {
 };
 
 
-// 🟢 Lấy thông tin chi tiết phim theo ID
+// Lấy thông tin chi tiết phim theo ID
 exports.getMovieById = async (req, res) => {
     try {
         const movie = await Movie.findById(req.params.id)
@@ -56,7 +55,7 @@ exports.getMovieById = async (req, res) => {
     }
 };
 
-// 🟢 Cập nhật thông tin phim
+// Cập nhật thông tin phim
 exports.updateMovie = async (req, res) => {
     try {
         const updatedMovie = await Movie.findByIdAndUpdate(req.params.id, req.body, {
@@ -77,7 +76,7 @@ exports.updateMovie = async (req, res) => {
     }
 };
 
-// 🟢 Xóa phim
+// Xóa phim
 exports.deleteMovie = async (req, res) => {
     try {
         const deletedMovie = await Movie.findByIdAndDelete(req.params.id);
@@ -95,7 +94,7 @@ exports.deleteMovie = async (req, res) => {
     }
 };
 
-// 🟢 Tìm kiếm và lọc phim (theo thể loại, ngôn ngữ, đạo diễn, hoặc tên phim)
+// Tìm kiếm và lọc phim (theo thể loại, ngôn ngữ, đạo diễn, hoặc tên phim)
 exports.searchMovies = async (req, res) => {
     try {
         const { title, genre, director, language } = req.query;

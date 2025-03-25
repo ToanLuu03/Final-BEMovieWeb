@@ -10,7 +10,7 @@ const theaterSchema = new mongoose.Schema({
         zipCode: String
     },
     phone: String,
-    facilities: [String], // Ví dụ: ["3D", "IMAX", "VIP"]
+    facilities: [String],
     showtimes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Showtime' }]
 }, { timestamps: true });
 

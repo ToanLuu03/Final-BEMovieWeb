@@ -6,8 +6,8 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const authRoutes = require('./routes/authRoutes');
 require('dotenv').config();
-require('./config/passport'); // Passport Config
-const movieRoutes = require('./routes/movieRoutes'); // Thêm route movies
+require('./config/passport'); 
+const movieRoutes = require('./routes/movieRoutes'); 
 const showtimeRoutes = require('./routes/showtimeRoutes');
 const bookingRoutes = require('./routes/bookingRoutes');
 const userRoutes = require('./routes/userRoutes');

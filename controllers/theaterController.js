@@ -25,10 +25,10 @@ exports.getTheaterById = async (req, res) => {
     try {
         const theater = await Theater.findById(req.params.id)
             .populate({
-                path: 'showtimes', // ✅ Đảm bảo đúng 'showtimes' (theaterSchema)
+                path: 'showtimes', 
                 populate: {
-                    path: 'movie', // ✅ Đảm bảo đúng 'movie' (showtimeSchema)
-                    select: 'title posterUrl' // ✅ Lấy đúng trường
+                    path: 'movie', 
+                    select: 'title posterUrl'
                 }
             });
 
@@ -36,7 +36,7 @@ exports.getTheaterById = async (req, res) => {
 
         res.json(theater);
     } catch (error) {
-        console.error(error); // ⚠️ In lỗi ra console để debug
+        console.error(error);
         res.status(500).json({ error: 'Error retrieving theater information!' });
     }
 };

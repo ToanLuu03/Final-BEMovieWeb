@@ -31,8 +31,8 @@ exports.register = async (req, res) => {
         const newUser = await User.create({
             username,
             email,
-            password, // Password sẽ được hash tự động trong pre-save hook
-            googleId: undefined // Đảm bảo googleId không được set cho đăng ký email
+            password, 
+            googleId: undefined
         });
 
         res.status(201).json({
@@ -78,11 +78,9 @@ exports.googleAuth = (req, res) => {
             return res.status(401).json({ message: 'Authentication failed!' });
         }
 
-        // Tạo JWT Token với thông tin người dùng
         const token = createToken(req.user);
 
         const frontendUrl = process.env.FRONTEND_URL || "http://localhost:5173";
-        // Chuyển hướng về frontend với token
          res.redirect(`${frontendUrl}/signin?token=${token}`);
         // res.redirect(`${frontendUrl}/home?token=${token}`);
     } catch (error) {

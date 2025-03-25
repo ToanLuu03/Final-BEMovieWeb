@@ -2,7 +2,7 @@ const Showtime = require('../models/Showtime');
 const Movie = require('../models/Movie');
 const Theater = require('../models/Theater');
 
-// 1. Lấy danh sách suất chiếu cho từng phim cụ thể
+// Lấy danh sách suất chiếu cho từng phim cụ thể
 exports.getShowtimesByMovie = async (req, res) => {
     try {
         const { movieId } = req.params;
@@ -16,7 +16,7 @@ exports.getShowtimesByMovie = async (req, res) => {
         res.status(500).json({ success: false, message: 'Server error' });
     }
 }
-// 2. Lấy danh sách suất chiếu theo rạp cụ thể
+// Lấy danh sách suất chiếu theo rạp cụ thể
 exports.getShowtimesByTheater = async (req, res) => {
     try {
         const { theaterId } = req.params;
@@ -33,7 +33,7 @@ exports.getShowtimesByTheater = async (req, res) => {
         res.status(500).json({ success: false, message: 'Server error.' });
     }
 };
-// 3. Lấy tất cả suất chiếu hợp lệ (chưa hết hạn)
+// Lấy tất cả suất chiếu hợp lệ (chưa hết hạn)
 exports.getAllValidShowtimes = async (req, res) => {
     try {
         const showtimes = await Showtime.find({
@@ -48,7 +48,7 @@ exports.getAllValidShowtimes = async (req, res) => {
     }
 };
 
-// 4. Tạo mới suất chiếu
+// Tạo mới suất chiếu
 exports.createShowtime = async (req, res) => {
     try {
         const { movie, theater, showDate, timeSlots, price, availableSeats } = req.body;
@@ -71,7 +71,7 @@ exports.createShowtime = async (req, res) => {
 };
 
 
-// 5. Cập nhật suất chiếu
+// Cập nhật suất chiếu
 exports.updateShowtime = async (req, res) => {
     try {
         const { id } = req.params;
@@ -88,7 +88,7 @@ exports.updateShowtime = async (req, res) => {
     }
 };
 
-// 6. Xóa suất chiếu
+// Xóa suất chiếu
 exports.deleteShowtime = async (req, res) => {
     try {
         const { id } = req.params;

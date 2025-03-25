@@ -13,7 +13,6 @@ const userSchema = new mongoose.Schema({
     location: { type: String }
 }, { timestamps: true });
 
-// Hash password khi lưu (không áp dụng cho Google OAuth)
 userSchema.pre('save', async function (next) {
     if (!this.isModified('password') || !this.password) return next();
     this.password = await bcrypt.hash(this.password, 10);

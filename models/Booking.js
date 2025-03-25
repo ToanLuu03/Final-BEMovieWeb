@@ -6,7 +6,7 @@ const bookingSchema = new mongoose.Schema({
     showtime: { type: mongoose.Schema.Types.ObjectId, ref: 'Showtime', required: true },
     movie: { type: mongoose.Schema.Types.ObjectId, ref: 'Movie', required: true },
     theater: { type: mongoose.Schema.Types.ObjectId, ref: 'Theater', required: true },
-    tickets: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Ticket' }], // Tham chiếu đến nhiều vé
+    tickets: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Ticket' }],
     totalPrice: { type: Number, required: true },
     bookingDate: { type: Date, default: Date.now },
     paymentStatus: {
